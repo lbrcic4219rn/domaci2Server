@@ -65,15 +65,18 @@ public class ServerThread implements Runnable{
                 Main.history.add(newMessage);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Problem connecting to the client");
+            //e.printStackTrace();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            System.out.println("Unexpected interrupt");
+            //e.printStackTrace();
         } finally {
             if(in != null){
                 try {
                     in.close();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    //e.printStackTrace();
+                    System.out.println("Problem disconnecting");
                 }
             }
 
@@ -85,7 +88,8 @@ public class ServerThread implements Runnable{
                 try {
                     socket.close();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    //e.printStackTrace();
+                    System.out.println("Problem disconnecting");
                 }
             }
         }
@@ -94,10 +98,11 @@ public class ServerThread implements Runnable{
     private String sanitizeMessage(String msg) {
         for (String forbiddenWord: Main.forbiddenWords){
             StringBuilder sb = new StringBuilder();
-            String replacement = "";
-            for(int i = 0; i < forbiddenWord.length(); i++){
+            String replacement = "" + forbiddenWord.charAt(0);
+            for(int i = 0; i < forbiddenWord.length() - 2; i++){
                 replacement += "*";
             }
+            replacement += forbiddenWord.charAt(forbiddenWord.length() - 1);
             msg = msg.replace(forbiddenWord, replacement);
         }
         return msg;

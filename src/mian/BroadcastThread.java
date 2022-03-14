@@ -26,11 +26,13 @@ public class BroadcastThread implements Runnable{
                         PrintWriter out = new PrintWriter(new OutputStreamWriter(user.getValue().getOutputStream()), true);
                         out.println(message.getData());
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        System.out.println("Problem connecting to the client");
+                        //e.printStackTrace();
                     }
                 });
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                System.out.println("Unexpected interrupt");
+                //e.printStackTrace();
             }
         }
     }

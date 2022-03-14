@@ -19,6 +19,7 @@ public class Main {
     public static ConcurrentHashMap<String, Socket> users = new ConcurrentHashMap<>();
     public static CopyOnWriteArrayList<String> history = new CopyOnWriteArrayList<>();
     public static List<String> forbiddenWords = new ArrayList<>();
+
     public static void main(String[] args) {
         initForbiddenWords();
         try {
@@ -31,6 +32,7 @@ public class Main {
                 st.start();
             }
         } catch (IOException e) {
+            System.out.println("Problem connecting to the client");
             e.printStackTrace();
         }
 
